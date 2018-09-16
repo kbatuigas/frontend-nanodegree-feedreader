@@ -27,10 +27,6 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
-         */
         it('URLs are defined and are not empty', function() {
             //iterate over allFeeds array
             for (let feed of allFeeds) {
