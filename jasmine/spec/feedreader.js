@@ -26,7 +26,11 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
+        /* Next, we test to make sure that each object in the 
+        /* allFeeds array has a defined 'url' property. We also
+        /* test to make sure that the url property values are
+        /* valid.
+        */
         it('URLs are defined and are not empty', function() {
             //iterate over allFeeds array
             for (let feed of allFeeds) {
@@ -34,7 +38,7 @@ $(function() {
                 expect(feed.url).not.toEqual(' ', '', null);
                 expect(feed.url.startsWith('http')).toBe(true);
             }
-        })
+        });
 
 
         /* TODO: Write a test that loops through each feed
@@ -44,20 +48,25 @@ $(function() {
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* This test suite is for the menu (toggles on click) */
+    describe('The menu', function() {
 
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
-         */
+        //'body' element has class 'menu-hidden'
+         // The event listener that calls toggleClass has not been called
+        it('is hidden by default', function() {
+            let body = document.querySelector('body');
+            let callback = jasmine.createSpy('body', 'toggleClass');
+            
+            expect(body.className).toEqual('menu-hidden');
+            expect(callback).not.toHaveBeenCalled();
+        });
 
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-
+    });
     /* TODO: Write a new test suite named "Initial Entries" */
 
         /* TODO: Write a test that ensures when the loadFeed
