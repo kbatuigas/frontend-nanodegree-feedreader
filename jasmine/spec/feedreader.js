@@ -50,13 +50,11 @@ $(function() {
 
     /* This test suite is for the menu (toggles on click) */
     describe('The menu', function() {
-
+        let body = document.querySelector('body');
+        let callback = jasmine.createSpy('body', 'toggleClass');
         //'body' element has class 'menu-hidden'
          // The event listener that calls toggleClass has not been called
         it('is hidden by default', function() {
-            let body = document.querySelector('body');
-            let callback = jasmine.createSpy('body', 'toggleClass');
-            
             expect(body.className).toEqual('menu-hidden');
             expect(callback).not.toHaveBeenCalled();
         });
@@ -66,6 +64,7 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+
     });
     /* TODO: Write a new test suite named "Initial Entries" */
 
