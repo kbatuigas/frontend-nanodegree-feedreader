@@ -50,24 +50,31 @@ $(function() {
 
     /* This test suite is for the menu (toggles on click) */
     describe('The menu', function() {
+        let body = document.querySelector('body');
+        let bodyClass = body.className;
+        let callback = jasmine.createSpy('body', 'toggleClass');
+        let menuIcon = document.querySelector('.menu-icon-link');
+        //let menuClick = jasmine.createSpy('menuIcon', 'clicked');
 
         //'body' element has class 'menu-hidden'
          // The event listener that calls toggleClass has not been called
         it('is hidden by default', function() {
-            let body = document.querySelector('body');
-            let callback = jasmine.createSpy('body', 'toggleClass');
-            
-            expect(body.className).toEqual('menu-hidden');
+            expect(bodyClass).toEqual('menu-hidden');
             expect(callback).not.toHaveBeenCalled();
         });
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
+         /* An even number of clicks should result in the menu being hidden
           */
+        it('changes visibility when menu icon is clicked', function() {
+           if (callback.calls.count() % 2 === 0) {
+               expect(bodyClass).toEqual('menu-hidden');
+           } else {
+               expect(bodyClass).not.toEqual('menu-hidden');
+           }  
+        });
     });
     /* TODO: Write a new test suite named "Initial Entries" */
+ 
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
