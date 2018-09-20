@@ -54,7 +54,6 @@ $(function() {
         let bodyClass = body.className;
         let callback = jasmine.createSpy('body', 'toggleClass');
         let menuIcon = document.querySelector('.menu-icon-link');
-        //let menuClick = jasmine.createSpy('menuIcon', 'clicked');
 
         //'body' element has class 'menu-hidden'
          // The event listener that calls toggleClass has not been called
@@ -82,12 +81,12 @@ $(function() {
         });
 
         /* When the loadFeed function is called and completes its work, 
-         * check that there is at least a single .entry element within 
-         * the .feed container. loadFeed() is asynchronous so this test requires
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
+        * check that there is at least a single .entry element within 
+        * the .feed container. loadFeed() is asynchronous so this test requires
+        * the use of Jasmine's beforeEach and asynchronous done() function.
+        */
 
-         it('has at least one .entry element within the .feed container', function(done) {
+        it('has at least one .entry element within the .feed container', function(done) {
             let rssFeed = document.querySelector('.feed');
             let feedEntry = document.getElementsByClassName('.entry');
         
@@ -96,16 +95,37 @@ $(function() {
             expect(feedEntry).toBeDefined();
             expect(feedEntry).not.toBeNull();
             done();
-         });
+        });
 
     });
 
-    
+    describe('New Feed Selection', function() {
+        let rssFeed = document.querySelector('.feed');
+        let startFeed = [];
+        
+        beforeEach(function (done) {
+            loadFeed(0);
+            Array.from(rssFeed.children).forEach(function(entry) {
+                startFeed.push(entry.textContent);
+            });
+            loadFeed(1, done);  // Remember that a callback function can be
+                                // passed into loadFeed as a second parameter,
+                                // which is called after everything has run
+                                // successfully.
+            //done();           
+        });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+        /* Each entry in the original feed is "compared" against the 
+        /* corresponding entry in the new feed. The test is passed
+        /* if they are not equal. 
+        */
+        it('has new content', function(done) {
+            Array.from(rssFeed.children).forEach(function(entry, i) {               
+                expect(entry.textContent === startFeed[i]).toBe(false);   
+            });
+            done();
+        });
+    });
 }());
+
+            
