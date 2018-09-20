@@ -40,11 +40,17 @@ $(function() {
             }
         });
 
+        /* Test to ensure that each feed 'name' is defined
+        /* and not empty.
+        */
+        it('names are defined and are not empty', function() {
+            //iterate over allFeeds array
+            for (let feed of allFeeds) {
+                expect(feed.name).toBeDefined();
+                expect(feed.name).not.toEqual(' ', '', null);
+            }
+        });
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
     });
 
 
