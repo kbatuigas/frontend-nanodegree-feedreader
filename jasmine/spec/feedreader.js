@@ -57,14 +57,14 @@ $(function() {
     /* This test suite is for the menu (toggles on click) */
     describe('The menu', function() {
         let body = document.querySelector('body');
-        let bodyClass = body.className;
+        //let bodyClass = body.className;
         let callback = jasmine.createSpy('body', 'toggleClass');
         let menuIcon = document.querySelector('.menu-icon-link');
 
         //'body' element has class 'menu-hidden'
          // The event listener that calls toggleClass has not been called
         it('is hidden by default', function() {
-            expect(bodyClass).toEqual('menu-hidden');
+            expect(body.classList.contains('menu-hidden')).toBe(true);
             expect(callback).not.toHaveBeenCalled();
         });
 
@@ -72,9 +72,9 @@ $(function() {
           */
         it('changes visibility when menu icon is clicked', function() {
            if (callback.calls.count() % 2 === 0) {
-               expect(bodyClass).toEqual('menu-hidden');
+               expect(body.classList.contains('menu-hidden')).toBe(true);
            } else {
-               expect(bodyClass).not.toEqual('menu-hidden');
+               expect(body.classList.contains('menu-hidden')).toBe(false);
            }  
         });
     });
