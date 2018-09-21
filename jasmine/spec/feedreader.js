@@ -105,29 +105,28 @@ $(function() {
 
     describe('New Feed Selection', function() {
         let rssFeed = document.querySelector('.feed');
-        let startFeed = [];
+        let startFeed, nextFeed;
         
+        /* Remember that a callback function can be
+        * passed into loadFeed as a second parameter,
+        * which is called after everything has run
+        * successfully.
+        */
         beforeEach(function (done) {
-            loadFeed(0);
-            Array.from(rssFeed.children).forEach(function(entry) {
-                startFeed.push(entry.textContent);
-            });
-            loadFeed(1, done);  // Remember that a callback function can be
-                                // passed into loadFeed as a second parameter,
-                                // which is called after everything has run
-                                // successfully.
-            //done();           
+            loadFeed(0, function() {
+                startFeed = rssFeed.innerHTML;
+                loadFeed(1, function() {
+                    nextFeed = rssFeed.innerHTML;
+                    done();
+                });
+            });      
         });
 
-        /* Each entry in the original feed is "compared" against the 
-        /* corresponding entry in the new feed. The test is passed
-        /* if they are not equal. 
+        /* HTML of first feed is compared with HTML of new 
+        /* feed. The test is passed if they are not equal. 
         */
-        it('has new content', function(done) {
-            Array.from(rssFeed.children).forEach(function(entry, i) {               
-                expect(entry.textContent === startFeed[i]).toBe(false);   
-            });
-            done();
+        it('has new content', function() {             
+            expect(startFeed === nextFeed).toBe(false);   
         });
     });
 }());
