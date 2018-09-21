@@ -91,15 +91,14 @@ $(function() {
         * the use of Jasmine's beforeEach and asynchronous done() function.
         */
 
-        it('has at least one .entry element within the .feed container', function(done) {
+        it('has at least one .entry element within the .feed container', function() {
             let rssFeed = document.querySelector('.feed');
             let feedEntry = document.querySelectorAll('.feed .entry');
         
             expect(rssFeed).toBeDefined();
             expect(rssFeed).not.toBeNull();
             expect(feedEntry).toBeDefined();
-            expect(feedEntry.length).toBeGreaterThan(0);
-            done();
+            expect(feedEntry.length).toBeGreaterThan(0)
         });
 
     });
