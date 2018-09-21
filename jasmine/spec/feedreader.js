@@ -82,8 +82,7 @@ $(function() {
     describe('Initial Entries', function() {
         
         beforeEach(function (done) {
-            loadFeed(0);
-            done();
+            loadFeed(0, done);
         });
 
         /* When the loadFeed function is called and completes its work, 
@@ -92,15 +91,14 @@ $(function() {
         * the use of Jasmine's beforeEach and asynchronous done() function.
         */
 
-        it('has at least one .entry element within the .feed container', function(done) {
+        it('has at least one .entry element within the .feed container', function() {
             let rssFeed = document.querySelector('.feed');
-            let feedEntry = document.getElementsByClassName('.entry');
+            let feedEntry = document.querySelectorAll('.feed .entry');
         
             expect(rssFeed).toBeDefined();
             expect(rssFeed).not.toBeNull();
             expect(feedEntry).toBeDefined();
-            expect(feedEntry).not.toBeNull();
-            done();
+            expect(feedEntry.length).toBeGreaterThan(0)
         });
 
     });
