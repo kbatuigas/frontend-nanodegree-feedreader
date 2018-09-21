@@ -93,12 +93,12 @@ $(function() {
 
         it('has at least one .entry element within the .feed container', function(done) {
             let rssFeed = document.querySelector('.feed');
-            let feedEntry = document.getElementsByClassName('.entry');
+            let feedEntry = document.querySelectorAll('.feed .entry');
         
             expect(rssFeed).toBeDefined();
             expect(rssFeed).not.toBeNull();
             expect(feedEntry).toBeDefined();
-            expect(feedEntry).not.toBeNull();
+            expect(feedEntry.length).toBeGreaterThan(0);
             done();
         });
 
